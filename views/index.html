@@ -1,0 +1,77 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: sueRimn
+ * @Date: 2020-12-29 21:07:12
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2021-01-15 16:52:48
+-->
+
+{{extend './basic.html'}}
+
+{{block 'head'}}
+<!-- index.css -->
+<link rel="stylesheet" href="/public/css/index.css">
+<!-- echarts boodstrap 百度地图 jquery-->
+<script src="/node_modules/echarts/dist/echarts.js"></script>
+<script src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=0d9gGzFEVQpwebwondD8Ux9Ol3FtaELH"></script>
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+{{/block}}
+
+{{block 'main'}}
+
+<div class="sec-nav">
+    <p>Dashboard</p>
+    <!-- Single button -->
+    <p>选择设备：</p>
+    <div class="btn-group">
+        <button type="button" class="my-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            检测设备1 <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="javascript:;">检测设备1</a></li>
+            <li><a href="javascript:;">检测设备2</a></li>
+            <li><a href="javascript:;">检测设备3</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="some-data">
+    <div class="now">
+        <div class="kuang wendu">
+            <h5 style="color: #98a6ad;">Temperature</h5>
+            <i class="bi bi-brightness-high-fill"></i>
+            <h3>{{nowData.Temperature}}°C</h3>
+            <p>{{nowData.timeString}}</p>
+        </div>
+        <div class="kuang shidu">
+            <h5 style="color: #98a6ad;">Humidity</h5>
+            <i class="bi bi-droplet-half"></i>
+            <h3>{{nowData.EnvHumidity}}%</h3>
+            <p>{{nowData.timeString}}</p>
+        </div>
+        <div class="kuang location">
+            <h5 style="color: #98a6ad;">Longitude-Latitude </h5>
+            <i class="bi bi-geo-alt-fill"></i>
+            <h3>{{nowData.Latitude}} , {{nowData.Longitude}}</h3>
+            <p>{{nowData.timeString}}</p>
+        </div>
+        <div class="kuang place">
+            <h5 style="color: #98a6ad;">Location</h5>
+            <i class="bi bi-geo-fill"></i>
+            <h3>杭州</h3>
+            <p>{{nowData.timeString}}</p>
+        </div>
+    </div>
+    <div class="line-chart"></div>
+</div>
+<div id="location"></div>
+{{/block}}
+
+{{block 'script'}}
+<script src="/public/js/index/options.js" type="module"></script>
+<script src="/public/js/index/main.js" type="module"></script>
+{{/block}}

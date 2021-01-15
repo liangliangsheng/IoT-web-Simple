@@ -1,0 +1,83 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: sueRimn
+ * @Date: 2021-01-06 16:59:22
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2021-01-15 12:52:16
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- bootstrap.css base.css -->
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/public/css/base.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    {{block 'head'}}{{/block}}
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z" />
+                </svg>
+                <span>615实验室</span>
+            </div>
+            <ul class="sensor">
+                <li>
+                    <a href="javascript:;">NAVIGATION</a>
+                </li>
+                <li>
+                    <i class="bi bi-easel"></i>
+                    <a href="/">Dashboards</a>
+                    <i class="bi bi-chevron-right arrow-right"></i>
+                </li>
+                <li>
+                    <i class="bi bi-clipboard-data"></i>
+                    <a href="/dataset">Database</a>
+                    <i class="bi bi-chevron-right arrow-right"></i>
+                </li>
+                <li>
+                    <i class="bi bi-cpu"></i>
+                    <a href="javascript:;">Facility</a>
+                    <i class="bi bi-chevron-right arrow-right"></i>
+                </li>
+                <li>
+                    <i class="bi bi-gear"></i>
+                    <a href="javascript:;">Setting</a>
+                    <i class="bi bi-chevron-right arrow-right"></i>
+                </li>
+            </ul>
+        </div>
+
+        <div class="nav">
+            <div class="input-group">
+                <i class="bi bi-search" style="font-size: 14px;"></i>
+                <input type="text" class="form-control" name="search" value="Search">
+                <button type="submit" class="my-btn" >Submit</button>
+            </div>
+            <div class="user-info">
+                <a href="javascript:;" class="user-head"></a>
+                <span class="user-name">Xiao Zhu zai</span>
+            </div>
+        </div>
+        <div class="content">
+            <div class="main">
+                {{block 'main'}}{{/block}}
+            </div>
+        </div>
+    </div>
+    {{block 'script'}}{{/block}}
+
+</body>
+
+</html>

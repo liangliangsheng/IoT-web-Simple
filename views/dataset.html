@@ -1,0 +1,90 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: sueRimn
+ * @Date: 2020-12-31 10:35:43
+ * @LastEditors: sueRimn
+ * @LastEditTime: 2021-01-15 16:48:40
+-->
+{{extend './basic.html'}}
+
+{{block 'head'}}
+<!-- dataset.css -->
+<link rel="stylesheet" href="/public/css/dataset.css">
+
+<!-- jquery art-template-web -->
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/art-template/lib/template-web.js"></script>
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+<script type="text/template" id="dataset">
+    <tr>
+        <th>序号</th>
+        <th>温度</th>
+        <th>湿度</th>
+        <th>经度</th>
+        <th>维度</th>
+        <th>时间</th>
+    </tr>
+    <% for(var i = 0; i < dataset.length; i++){ %>
+        <tr>
+            <td><%= i+1 %></td>
+            <td><%= dataset[i].Temperature %>°C</td>
+            <td><%= dataset[i].EnvHumidity %>%</td>
+            <td><%= dataset[i].Latitude %></td>
+            <td><%= dataset[i].Longitude %></td>
+            <td width='25%'><%= dataset[i].timeString %></td>
+        </tr>
+    <% } %>
+</script>
+
+
+{{/block}}
+
+{{block 'main'}}
+<div class="sec-nav">
+    <p>Datasets</p>
+    <!-- Single button -->
+    <p>选择设备：</p>
+    <div class="btn-group">
+        <button type="button" class="my-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            检测设备1 <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="javascript:;">检测设备1</a></li>
+            <li><a href="javascript:;">检测设备2</a></li>
+            <li><a href="javascript:;">检测设备3</a></li>
+        </ul>
+    </div>
+    <button type="button" class="my-btn"> 更新数据</button>
+</div>
+
+<div class="dataset">
+    <table class="data-table">
+        <tr>
+            <th>序号</th>
+            <th>温度</th>
+            <th>湿度</th>
+            <th>经度</th>
+            <th>维度</th>
+            <th>时间</th>
+        </tr>
+        {{each dataset}}
+        <tr>
+            <td>{{$index+1}}</td>
+            <td>{{$value.Temperature}}°C</td>
+            <td>{{$value.EnvHumidity}}%</td>
+            <td>{{$value.Latitude}}</td>
+            <td>{{$value.Longitude}}</td>
+            <td width='25%'>{{$value.timeString}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
+{{/block}}
+
+{{block 'script'}}
+<script src="/public/js/dataset/main.js"></script>
+{{/block}}
