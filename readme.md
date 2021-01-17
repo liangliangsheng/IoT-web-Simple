@@ -39,6 +39,12 @@ npm i
 let client2 = mqtt.connect("mqtt://????:1883");   //指定mqtt代理服务器
 ```
 
+- /view/index.html文件中需修改百度地图AK，没有AK去百度地图官网注册即可
+
+```html
+<script src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=填入你的AK"></script>
+```
+
 - 首先发送一条数据（可通过mqtt.fx模拟数据发送），不然数据库为空，页面显示将出现问题，数据格式如下
 
 ![image-20210117180018256](README.assets/image-20210117180018256.png)
