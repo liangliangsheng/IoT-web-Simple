@@ -4,17 +4,17 @@
  * @Author: sueRimn
  * @Date: 2020-12-25 12:11:32
  * @LastEditors: sueRimn
- * @LastEditTime: 2021-01-17 14:52:40
+ * @LastEditTime: 2021-01-17 17:57:57
  */
 let mqtt = require('mqtt');
-let client2 = mqtt.connect("mqtt://47.111.122.217:1883");   //指定服务端地址和端口
+let client2 = mqtt.connect("mqtt://????:1883");   //指定mqtt代理服务器
 let mongoose = require('../models/db.js')
 let schema = require('../models/Schema.js')
 
 // 实例化设备信息表模型
 let deviceInfo = mongoose.model('Info', schema.deviceInfo, 'infos')
 
-client2.subscribe('hyk', { qos: 1 });//订阅主题为hyk的消息  
+client2.subscribe('sensor', { qos: 1 });//订阅主题为hyk的消息  
 
 client2.on('message', function (top, message) {
 
