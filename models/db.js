@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2021-01-06 15:55:56
  * @LastEditors: sueRimn
- * @LastEditTime: 2021-01-06 15:59:38
+ * @LastEditTime: 2021-01-17 11:31:54
  */
 var mongoose = require('mongoose')
 var uris = 'mongodb://localhost/test'
@@ -15,5 +15,6 @@ mongoose.connect(uris, { useNewUrlParser: true, useUnifiedTopology: true }, func
     }
     console.log("数据库连接成功")
 })
+
 
 module.exports = mongoose

@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-12-29 21:07:12
  * @LastEditors: sueRimn
- * @LastEditTime: 2021-01-15 16:52:48
+ * @LastEditTime: 2021-01-17 15:45:12
 -->
 
 {{extend './basic.html'}}
@@ -27,14 +27,13 @@
     <!-- Single button -->
     <p>选择设备：</p>
     <div class="btn-group">
-        <button type="button" class="my-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            检测设备1 <span class="caret"></span>
+        <button type="button" class="device-button my-btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false"> <span class="text">检测设备-{{deviceIndex[0]}}</span> <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu">
-            <li><a href="javascript:;">检测设备1</a></li>
-            <li><a href="javascript:;">检测设备2</a></li>
-            <li><a href="javascript:;">检测设备3</a></li>
+        <ul class="device-index dropdown-menu">
+            {{each deviceIndex}}
+            <li><a href="javascript:;">检测设备-{{$value}}</a></li>
+            {{/each}}
         </ul>
     </div>
 </div>

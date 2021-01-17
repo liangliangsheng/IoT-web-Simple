@@ -57,7 +57,8 @@ let lineOption = {
         data: ['北京', '上海', '广州', '深圳', '香港', '澳门', '台湾'],
         axisLine: {
             lineStyle: {
-                color: '#DCE2E8'
+                color: '#DCE2E8',
+                width:0
             }
         },
         axisTick: {

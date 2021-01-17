@@ -16,14 +16,14 @@
 
 .sec-nav>p:nth-child(2) {
     position: absolute;
-    right: 110px;
+    right: 140px;
 }
 
 .sec-nav .btn-group {
     position: absolute;
     float: right;
     top: 7px;
-    right: 0;
+    right: 30px;
 }
 
 .some-data {

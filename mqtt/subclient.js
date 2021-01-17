@@ -4,33 +4,55 @@
  * @Author: sueRimn
  * @Date: 2020-12-25 12:11:32
  * @LastEditors: sueRimn
- * @LastEditTime: 2021-01-14 13:10:50
+ * @LastEditTime: 2021-01-17 14:52:40
  */
-var mqtt = require('mqtt');
-var client2 = mqtt.connect("mqtt://47.111.122.217:1883");   //指定服务端地址和端口
-var Sensor = require('../models/sensor')
+let mqtt = require('mqtt');
+let client2 = mqtt.connect("mqtt://47.111.122.217:1883");   //指定服务端地址和端口
+let mongoose = require('../models/db.js')
+let schema = require('../models/Schema.js')
 
-client2.subscribe('test', { qos: 1 });//订阅主题为test的消息  
+// 实例化设备信息表模型
+let deviceInfo = mongoose.model('Info', schema.deviceInfo, 'infos')
+
+client2.subscribe('hyk', { qos: 1 });//订阅主题为hyk的消息  
 
 client2.on('message', function (top, message) {
-    
-    var data = JSON.parse(message.toString())
-    console.log(data)
-    
-    // 添加时间数据
+
+    // 1.处理数据
+    let data = JSON.parse(message.toString())
+    // console.log(data)
+    // 添加数据时间
     let date = new Date()
     data.timeNumber = date.getTime()
     data.timeString = dateFormat("YYYY-mm-dd HH:MM:SS", date)
 
-    // 存储数据
-    new Sensor(data)
-        .save(function (err, user) {
-            if (err) {
-                return console.log("存储失败")
-                // return console.log(err)
-            }
-            console.log("收到数据，储存成功")
-        })
+    // 2.判断设备是否注册
+    deviceInfo.countDocuments({ id: data.id }, function (err, count) {
+        if (err) {
+            return console.log(err);
+        }
+
+        // 1.未注册，注册设备
+        if (count === 0) {
+            // 注册设备信息
+            new deviceInfo(data)
+                .save(function (err, user) {
+                    if (err) {
+                        return console.log("注册失败")
+                    }
+                    console.log("注册成功")
+                })
+        }
+        // 2.存储数据
+        let deviceData = mongoose.model('Device' + data.id, schema.deviceData, 'devices' + data.id)
+        new deviceData(data)
+            .save(function (err, user) {
+                if (err) {
+                    return console.log("存储失败")
+                }
+                console.log("收到数据，储存成功")
+            })
+    })
 })
 
 // 日期方法

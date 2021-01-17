@@ -168,3 +168,13 @@ html {
     padding: 10px 30px;
     width: 100%;
 }
+
+.device-index{
+    height: 90px;
+    z-index: 2;
+    overflow: auto;
+    padding: 0;
+}
+.device-index >li{
+    width: 80px;
+}

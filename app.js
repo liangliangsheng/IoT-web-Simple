@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2020-12-31 12:07:04
  * @LastEditors: sueRimn
- * @LastEditTime: 2021-01-15 13:44:29
+ * @LastEditTime: 2021-01-17 13:18:13
  */
 var express = require('express')
 var path = require('path')
@@ -25,6 +25,6 @@ app.set('views', path.join(__dirname, './views/'))         // 默认找view目�
 
 app.use(router)
 
-app.listen(3000, function () {
+app.listen(9028, function () {
     console.log('running')
 })

@@ -4,7 +4,7 @@
  * @Author: sueRimn
  * @Date: 2021-01-13 20:35:15
  * @LastEditors: sueRimn
- * @LastEditTime: 2021-01-15 16:52:37
+ * @LastEditTime: 2021-01-17 16:41:50
  */
 import { lineOption } from './options.js'
 let myChart1 = echarts.init(document.querySelector('.line-chart'));
@@ -14,29 +14,39 @@ let humArray = []
 let timeArray = []
 let latitude = ''
 let longitude = ''
-let realTime = 5000
+let realTime = 2000
 let marker
+// 是否初始化标志信号
 let chartsFlag = 0
 
+// 初始化页面
 $.ajax({
   type: "get",
-  url: "/updateCharts",
+  url: "/",
   dataType: "json",
-  data: { name: 'init' },
+  data: { name: 'realTimeUpdate', deviceIndex: getNowDevice() },
   success: function (data) {
     charts(data, chartsFlag)
-    setInterval(realTimeUpdate, realTime)
+    setInterval(updateCharts, realTime)
   },
   error: function (xhr) {
     console.log(xhr.status);
   }
 })
 
-function realTimeUpdate() {
+// 为链接绑定监听事件
+$('.device-index').on("click", 'a', function (event) {
+  $('.device-button .text').text($(event.target).text())
+  event.preventDefault()
+  updateCharts()
+})
+
+// 获取数据并绘制
+function updateCharts() {
   $.ajax({
     type: "get",
-    url: "/updateCharts",
-    data: { name: 'realTimeUpdate' },
+    url: "/",
+    data: { name: 'realTimeUpdate', deviceIndex: getNowDevice() },
     dataType: "json",
     success: function (data) {
       charts(data, chartsFlag)
@@ -47,6 +57,7 @@ function realTimeUpdate() {
   })
 }
 
+// 绘制数据
 function charts(data, flag) {
   let nowData = data[0]
   let revData = data.reverse()
@@ -56,13 +67,13 @@ function charts(data, flag) {
   latitude = nowData.Latitude
   longitude = nowData.Longitude
 
-  console.log(nowData);
-  
+  // console.log(nowData);
+
   if (flag) {
     // 更新框中数据
     $('.now p').text(nowData.timeString)
-    $('.wendu h3').text(nowData.Temperature+'°C')
-    $('.shidu h3').text(nowData.EnvHumidity+'%')
+    $('.wendu h3').text(nowData.Temperature + '°C')
+    $('.shidu h3').text(nowData.EnvHumidity + '%')
     $('.location h3').text(latitude + ' , ' + longitude)
     // 更新折线图
     myChart1.setOption({
@@ -104,4 +115,10 @@ function charts(data, flag) {
     map.addOverlay(marker);
     chartsFlag = 1
   }
+}
+
+// 获取当前显示设备index
+function getNowDevice() {
+  let deviceIndex = $('.device-button .text').text().split('-')[1]
+  return deviceIndex
 }
